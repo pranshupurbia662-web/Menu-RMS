@@ -1,14 +1,14 @@
 import React from "react";
 
 import Lefthome from "../atoms/Lefthome";
-import Mocktail from "../atoms/mocktail";
+import Mocktail from "../atoms/Mocktail";
 import Cocktail from "../atoms/Cocktail";
 import Vegstarter from "../atoms/Vegstarter";
 import Nonvegstarter from "../atoms/Nonvegstarter";
 import Mainc from "../atoms/Mainc";
 import Nonveg from "../atoms/Nonveg";
 import Desserts from "../atoms/Desserts";
-import Footer from "../atoms/footer";
+import Footer from "../atoms/Footer";
 
 const Home = () => {
 
