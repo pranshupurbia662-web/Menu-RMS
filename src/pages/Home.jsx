@@ -1,6 +1,5 @@
 import React from "react";
 
-import React from "react";
 
 import Lefthome from "../atoms/Lefthome.jsx";
 import Mocktail from "../atoms/Mocktail.jsx";
