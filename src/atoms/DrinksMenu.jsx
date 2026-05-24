@@ -14,9 +14,7 @@ const DrinksMenu = () => {
 
     try {
 
-     const { data } = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/menu`
-);
+   const { data } = await axios.get("/api/menu");
       const mocktailItems = data.filter(
         (item) => item.category === "Mocktail"
       );

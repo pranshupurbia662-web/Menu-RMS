@@ -14,9 +14,7 @@ const MainCourse = () => {
 
     try {
 
-    const { data } = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/menu`
-);
+    const { data } = await axios.get("/api/menu");
 
       const vegItems = data.filter(
         (item) => item.category === "VegMainCourse"
