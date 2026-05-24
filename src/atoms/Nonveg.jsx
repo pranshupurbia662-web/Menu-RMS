@@ -14,8 +14,8 @@ const Nonveg = () => {
     try {
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/menu"
-      );
+  `${import.meta.env.VITE_API_URL}/api/menu`
+);
 
       const nonVegItems = data
         .filter(

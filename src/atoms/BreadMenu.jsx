@@ -12,9 +12,9 @@ const BreadMenu = () => {
   const fetchBreadMenu = async () => {
     try {
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/menu"
-      );
+   const { data } = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/menu`
+);
 
       const breads = data.filter(
         (item) => item.category === "Bread"

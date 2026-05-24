@@ -13,9 +13,9 @@ const Mocktail = () => {
 
     try {
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/menu"
-      );
+     const { data } = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/menu`
+);
 
       const mocktailItems = data
         .filter(
