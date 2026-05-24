@@ -20,7 +20,7 @@ const Home = () => {
 
         {/* LEFT SIDEBAR */}
 
-        <div className="w-full lg:w-[280px] xl:w-[320px] lg:sticky lg:top-6 lg:self-start">
+        <div className="w-full lg:w[280px] xl:w-[320px] lg:sticky lg:top-6 lg:self-start">
 
           <Lefthome />
 
