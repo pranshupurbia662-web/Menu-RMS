@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/menu", menuRoutes);
+app.use("http://localhost:5000/api/menu", menuRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running Successfully");

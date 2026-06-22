@@ -16,7 +16,7 @@ const BreadMenu = () => {
     try {
 
       const response = await axios.get(
-        "/api/menu"
+        "http://localhost:5000/api/menu"
       );
 
       const breadItems = response.data.filter(

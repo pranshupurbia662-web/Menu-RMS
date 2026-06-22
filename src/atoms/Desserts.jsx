@@ -16,7 +16,7 @@ const Desserts = () => {
     try {
 
       const response = await axios.get(
-        "/api/menu"
+        "http://localhost:5000/api/menu"
       );
 
       const dessertItems = response.data.filter(

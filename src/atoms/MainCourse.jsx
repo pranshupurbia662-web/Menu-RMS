@@ -17,7 +17,7 @@ const MainCourse = () => {
     try {
 
       const response = await axios.get(
-        "/api/menu"
+        "http://localhost:5000/api/menu"
       );
 
       const vegItems = response.data.filter(

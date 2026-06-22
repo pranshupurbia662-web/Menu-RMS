@@ -16,7 +16,7 @@ const Mocktail = () => {
     try {
 
       const response = await axios.get(
-        "/api/menu"
+        "http://localhost:5000/api/menu"
       );
 
       const mocktailItems = response.data.filter(
