@@ -1,5 +1,5 @@
-import connectDB from "../config/Db.js";
-import Menu from "../models/Menumodel.js";
+import connectDB from "../Backend/config/Db.js";
+import Menu from "../Backend/models/MenuModel.js";
 
 export default async function handler(req, res) {
 
