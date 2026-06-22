@@ -16,7 +16,7 @@ const Cocktail = () => {
     try {
 
       const response = await axios.get(
-        "http://localhost:5000/api/menu"
+        "/api/menu"
       );
 
       const cocktailItems = response.data.filter(

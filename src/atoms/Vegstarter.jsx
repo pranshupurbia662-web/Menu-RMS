@@ -16,7 +16,7 @@ const Vegstarter = () => {
     try {
 
       const response = await axios.get(
-        "http://localhost:5000/api/menu"
+        "/api/menu"
       );
 
       const vegItems = response.data.filter(
