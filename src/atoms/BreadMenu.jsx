@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const BreadMenu = () => {
@@ -6,29 +6,41 @@ const BreadMenu = () => {
   const [artisanBreads, setArtisanBreads] = useState([]);
 
   useEffect(() => {
+
     fetchBreadMenu();
+
   }, []);
 
   const fetchBreadMenu = async () => {
+
     try {
 
- const { data } = await axios.get("/api/menu");
-
-      const breads = data.filter(
-        (item) => item.category === "Bread"
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
       );
 
-      setArtisanBreads(breads);
+      const breadItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "bread" &&
+          item.isAvailable === true
+      );
+
+      setArtisanBreads(breadItems);
 
     } catch (error) {
+
       console.log(error);
+
     }
+
   };
 
   return (
+
     <div className="w-full min-h-screen px-3 sm:px-6 lg:px-8 py-4">
 
       <div className="text-center mb-8 sm:mb-12">
+
         <h1 className="uppercase text-3xl sm:text-5xl lg:text-6xl text-[#7B1E1E] font-serif tracking-wide">
           Bread Menu
         </h1>
@@ -36,6 +48,7 @@ const BreadMenu = () => {
         <p className="text-[#D4A017] text-lg mt-3 sm:mt-4 tracking-[4px]">
           ━━━━━━ ✦ ━━━━━━
         </p>
+
       </div>
 
       <div className="w-full bg-[#fffaf4] rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6">
@@ -88,6 +101,7 @@ const BreadMenu = () => {
       </div>
 
     </div>
+
   );
 };
 

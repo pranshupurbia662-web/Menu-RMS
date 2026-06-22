@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const Cocktail = () => {
@@ -6,32 +6,39 @@ const Cocktail = () => {
   const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
+
     fetchCocktails();
+
   }, []);
 
   const fetchCocktails = async () => {
 
     try {
 
-     const { data } = await axios.get("/api/menu");
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
+      );
 
-      const cocktailItems = data
-        .filter(
-          (item) => item.category === "Cocktail"
-        )
-        .slice(0, 5);
+      const cocktailItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "drinks" &&
+          item.type?.trim().toLowerCase() === "cocktail" &&
+          item.isAvailable === true
+      );
 
-      setDrinks(cocktailItems);
+      setDrinks(cocktailItems.slice(0,5));
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
 
   return (
 
-    <div className=" rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
+    <div className="bg-[#f7f3ef] rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
 
       <div className="flex items-center gap-3 mb-4 sm:mb-5">
 

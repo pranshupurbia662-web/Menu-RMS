@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const StarterMenu = () => {
@@ -7,28 +7,41 @@ const StarterMenu = () => {
   const [nonVegStarters, setNonVegStarters] = useState([]);
 
   useEffect(() => {
+
     fetchStarterMenu();
+
   }, []);
 
   const fetchStarterMenu = async () => {
 
     try {
 
-    const { data } = await axios.get("/api/menu");
-
-      const vegItems = data.filter(
-        (item) => item.category === "VegStarter"
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
       );
 
-      const nonVegItems = data.filter(
-        (item) => item.category === "NonVegStarter"
+      const vegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "starter" &&
+          item.type?.trim().toLowerCase() === "veg" &&
+          item.isAvailable === true
+      );
+
+      const nonVegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "starter" &&
+          item.type?.trim().toLowerCase() === "nonveg" &&
+          item.isAvailable === true
       );
 
       setVegStarters(vegItems);
+
       setNonVegStarters(nonVegItems);
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
@@ -67,6 +80,7 @@ const StarterMenu = () => {
   );
 
   return (
+
     <div className="w-full min-h-screen px-3 sm:px-6 lg:px-8 py-4">
 
       <div className="text-center mb-8 sm:mb-12">
@@ -81,7 +95,9 @@ const StarterMenu = () => {
 
       </div>
 
-      <div className="w-full  rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6 mb-6 sm:mb-10">
+      {/* VEG */}
+
+      <div className="w-full bg-[#fffaf4] rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6 mb-6 sm:mb-10">
 
         <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-8">
 
@@ -102,6 +118,8 @@ const StarterMenu = () => {
         <CardGrid items={vegStarters} />
 
       </div>
+
+      {/* NON VEG */}
 
       <div className="w-full bg-[#fffaf4] rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6">
 
@@ -126,6 +144,7 @@ const StarterMenu = () => {
       </div>
 
     </div>
+
   );
 };
 

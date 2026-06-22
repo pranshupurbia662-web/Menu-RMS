@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const MainCourse = () => {
@@ -7,28 +7,41 @@ const MainCourse = () => {
   const [nonVegMainCourse, setNonVegMainCourse] = useState([]);
 
   useEffect(() => {
+
     fetchMainCourse();
+
   }, []);
 
   const fetchMainCourse = async () => {
 
     try {
 
-    const { data } = await axios.get("/api/menu");
-
-      const vegItems = data.filter(
-        (item) => item.category === "VegMainCourse"
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
       );
 
-      const nonVegItems = data.filter(
-        (item) => item.category === "NonVegMainCourse"
+      const vegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "maincourse" &&
+          item.type?.trim().toLowerCase() === "veg" &&
+          item.isAvailable === true
+      );
+
+      const nonVegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "maincourse" &&
+          item.type?.trim().toLowerCase() === "nonveg" &&
+          item.isAvailable === true
       );
 
       setVegMainCourse(vegItems);
+
       setNonVegMainCourse(nonVegItems);
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
@@ -67,7 +80,8 @@ const MainCourse = () => {
   );
 
   return (
-    <div className="w-full min-h-screen  px-3 sm:px-6 lg:px-8 py-4">
+
+    <div className="w-full min-h-screen px-3 sm:px-6 lg:px-8 py-4">
 
       <div className="text-center mb-8 sm:mb-12">
 
@@ -80,6 +94,8 @@ const MainCourse = () => {
         </p>
 
       </div>
+
+      {/* VEG */}
 
       <div className="w-full bg-[#fffaf4] rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6 mb-6 sm:mb-10">
 
@@ -102,6 +118,8 @@ const MainCourse = () => {
         <CardGrid items={vegMainCourse} />
 
       </div>
+
+      {/* NON VEG */}
 
       <div className="w-full bg-[#fffaf4] rounded-[24px] sm:rounded-[32px] border border-[#D4A017]/30 shadow-md p-4 sm:p-6">
 
@@ -126,6 +144,7 @@ const MainCourse = () => {
       </div>
 
     </div>
+
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const Nonveg = () => {
@@ -6,31 +6,39 @@ const Nonveg = () => {
   const [nonVegMainCourse, setNonVegMainCourse] = useState([]);
 
   useEffect(() => {
+
     fetchNonVegMainCourse();
+
   }, []);
 
   const fetchNonVegMainCourse = async () => {
 
     try {
 
-     const { data } = await axios.get("/api/menu");
-      const nonVegItems = data
-        .filter(
-          (item) => item.category === "NonVegMainCourse"
-        )
-        .slice(0, 5);
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
+      );
 
-      setNonVegMainCourse(nonVegItems);
+      const nonVegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "maincourse" &&
+          item.type?.trim().toLowerCase() === "nonveg" &&
+          item.isAvailable === true
+      );
+
+      setNonVegMainCourse(nonVegItems.slice(0,5));
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
 
   return (
 
-    <div className=" rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
+    <div className="bg-[#f7f3ef] rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
 
       <div className="flex items-center gap-3 mb-4 sm:mb-5">
 

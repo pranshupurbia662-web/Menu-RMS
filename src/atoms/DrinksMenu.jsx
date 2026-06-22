@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const DrinksMenu = () => {
@@ -7,27 +7,41 @@ const DrinksMenu = () => {
   const [cocktails, setCocktails] = useState([]);
 
   useEffect(() => {
+
     fetchDrinksMenu();
+
   }, []);
 
   const fetchDrinksMenu = async () => {
 
     try {
 
-   const { data } = await axios.get("/api/menu");
-      const mocktailItems = data.filter(
-        (item) => item.category === "Mocktail"
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
       );
 
-      const cocktailItems = data.filter(
-        (item) => item.category === "Cocktail"
+      const mocktailItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "drinks" &&
+          item.type?.trim().toLowerCase() === "mocktail" &&
+          item.isAvailable === true
+      );
+
+      const cocktailItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "drinks" &&
+          item.type?.trim().toLowerCase() === "cocktail" &&
+          item.isAvailable === true
       );
 
       setMocktails(mocktailItems);
+
       setCocktails(cocktailItems);
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
@@ -40,7 +54,7 @@ const DrinksMenu = () => {
 
         <div
           key={index}
-          className="bg-white rounded-3xl p-2 sm:p-3 border border-[#D4A017]/20 shadow-md cursor-pointer hover:scale-105 transition duration-300"
+          className="bg-[#fffaf3] rounded-3xl p-2 sm:p-3 border border-[#D4A017]/20 shadow-md cursor-pointer hover:scale-105 transition duration-300"
         >
 
           <img
@@ -66,6 +80,7 @@ const DrinksMenu = () => {
   );
 
   return (
+
     <div className="w-full min-h-screen px-3 sm:px-6 lg:px-8 py-4">
 
       <div className="text-center mb-8 sm:mb-12">
@@ -125,6 +140,7 @@ const DrinksMenu = () => {
       </div>
 
     </div>
+
   );
 };
 

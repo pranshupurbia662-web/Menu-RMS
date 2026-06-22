@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 const Vegstarter = () => {
@@ -6,32 +6,39 @@ const Vegstarter = () => {
   const [vegStarters, setVegStarters] = useState([]);
 
   useEffect(() => {
+
     fetchVegStarters();
+
   }, []);
 
   const fetchVegStarters = async () => {
 
     try {
 
-      const { data } = await axios.get("/api/menu");
+      const response = await axios.get(
+        "http://localhost:5000/api/menu"
+      );
 
-      const vegItems = data
-        .filter(
-          (item) => item.category === "VegStarter"
-        )
-        .slice(0, 5);
+      const vegItems = response.data.filter(
+        (item) =>
+          item.category?.trim().toLowerCase() === "starter" &&
+          item.type?.trim().toLowerCase() === "veg" &&
+          item.isAvailable === true
+      );
 
-      setVegStarters(vegItems);
+      setVegStarters(vegItems.slice(0,5));
 
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
 
   return (
 
-    <div className=" rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
+    <div className="bg-[#f7f3ef] rounded-3xl border border-[#D4A017]/30 shadow-md p-4 sm:p-5">
 
       <div className="flex items-center gap-3 mb-4 sm:mb-5">
 
